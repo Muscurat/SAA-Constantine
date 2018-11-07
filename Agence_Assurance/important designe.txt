@@ -1,0 +1,24 @@
+atamnadir@gmail.com
+
+************************************************
+
+$(document).ready(function() { 
+    
+    $("html").niceScroll();
+    
+    $(".list-transport").hide();
+    $(".list-utilitaire").hide();
+    
+    
+  }
+);
+
+$(window).load(function(){
+    
+   $(".loading .spinner").fadeOut(1000, function(){
+       $(this).parent().fadeOut(1000, function(){
+           $("body").css("overflow","auto");
+           $(this).remove();
+       });
+   });
+});

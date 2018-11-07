@@ -1,0 +1,31 @@
+#carousel_images{
+    position:relative;
+}
+#nav_accueil{
+    position:absolute;
+    top:20px;
+}
+#images{
+    height: 600px;
+}
+#form_login{
+    background-color:rgba(255,255,255,1);
+    border-radius:15px;
+    border:solid 3px #009688;
+}
+#close:hover{
+    color:red;
+}
+#close{
+    margin:5px;
+}
+#login,#help,#doc{
+    border: solid 2px white;
+    color:white;
+    outline:none;
+    border-radius:25px;
+    display:inline;
+}
+.material-icons{
+    color:dimgray;
+}

@@ -1,0 +1,148 @@
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	var options = {
+			target:'#rapport_file_name', 
+			beforeSubmit:  beforeSubmit,
+			success:function(data){
+                $('#upload_rapport').modal('hide');
+                $('#download_ext').show();
+            }, 
+			resetForm: true 
+		}; 
+		
+	 $('#MyUploadForm').submit(function() { 
+			$(this).ajaxSubmit(options);  			
+			// always return false to prevent standard browser submit and page navigation 
+			return false; 
+	 }); 
+    
+//function to check file size before uploading.
+function beforeSubmit(){
+    //check whether browser fully supports all File API
+   if (window.File && window.FileReader && window.FileList && window.Blob)
+	{
+		
+		if( !$('#FileInput').val()) //check empty input filed
+		{
+			$("#output").html("Are you kidding me?");
+			return false
+		}
+		
+		var fsize = $('#FileInput')[0].files[0].size; //get file size
+		var ftype = $('#FileInput')[0].files[0].type; // get file type
+		
+
+		//allow file types 
+		switch(ftype)
+        {
+            case 'image/png': 
+			case 'image/gif': 
+			case 'image/jpeg': 
+			case 'image/pjpeg':
+			case 'text/plain':
+			case 'text/html':
+			case 'application/x-zip-compressed':
+			case 'application/pdf':
+			case 'application/force-download':
+			case 'application/msword':
+			case 'application/vnd.ms-excel':
+			case 'video/mp4':
+                break;
+            default:
+                $("#output").html("<b>"+ftype+"</b> Unsupported file type!");
+				return false
+        }
+		
+		//Allowed file size is less than 5 MB (1048576)
+		if(fsize>5242880) 
+		{
+			$("#output").html("<b>"+bytesToSize(fsize) +"</b> Too big file! <br />File is too big, it should be less than 5 MB.");
+			return false
+		}
+				
+	}
+	else
+	{
+		//Output error to older unsupported browsers that doesn't support HTML5 File API
+		$("#output").html("Please upgrade your browser, because your current browser lacks some new features we need!");
+		return false;
+	}
+}
+
+//function to format bites bit.ly/19yoIPO
+function bytesToSize(bytes) {
+   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+   if (bytes == 0) return '0 Bytes';
+   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+}
+
+}); 
+
+</script>
+ 
+
+	
+<?php
+if(isset($_FILES["FileInput"]) && $_FILES["FileInput"]["error"]== UPLOAD_ERR_OK)
+{
+    ############ Edit settings ##############
+    $UploadDirectory    = '/home/website/file_upload/uploads/'; //specify upload directory ends with / (slash)
+    ##########################################
+   
+    /*
+    Note : You will run into errors or blank page if "memory_limit" or "upload_max_filesize" is set to low in "php.ini".
+    Open "php.ini" file, and search for "memory_limit" or "upload_max_filesize" limit
+    and set them adequately, also check "post_max_size".
+    */
+   
+    //check if this is an ajax request
+    if (!isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        die();
+    }
+   
+   
+    //Is file size is less than allowed size.
+    if ($_FILES["FileInput"]["size"] > 5242880) {
+        die("File size is too big!");
+    }
+   
+    //allowed file type Server side check
+    switch(strtolower($_FILES['FileInput']['type']))
+        {
+            //allowed file types
+            case 'image/png':
+            case 'image/gif':
+            case 'image/jpeg':
+            case 'image/pjpeg':
+            case 'text/plain':
+            case 'text/html': //html file
+            case 'application/x-zip-compressed':
+            case 'application/pdf':
+            case 'application/msword':
+            case 'application/vnd.ms-excel':
+            case 'video/mp4':
+                break;
+            default:
+                die('Unsupported File!'); //output error
+    }
+   
+    $File_Name          = strtolower($_FILES['FileInput']['name']);
+    $File_Ext           = substr($File_Name, strrpos($File_Name, '.')); //get file extention
+    $Random_Number      = rand(0, 9999999999); //Random number to be added to name.
+    $NewFileName        = $Random_Number.$File_Ext; //new file name
+   
+    if(move_uploaded_file($_FILES['FileInput']['tmp_name'], $UploadDirectory.$NewFileName ))
+       {
+        // do other stuff
+               die('Success! File Uploaded.');
+    }else{
+        die('error uploading File!');
+    }
+   
+}
+else
+{
+    die('Something wrong with upload! Is "upload_max_filesize" set correctly?');
+}

@@ -1,0 +1,52 @@
+body {
+    padding-top: 40px;
+    background-color: #EEE
+}
+
+h1 {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+legend {color: #E41B17; border-bottom: 2px solid #CCC}
+
+.checkbox{margin: 5px 5px}
+
+.checkbox label{
+    font-size: 17px
+}
+
+.insc-form {
+    margin-top: 50px
+}
+
+.insc-form .form-group .form-control{
+    border-radius: 0px
+}
+
+.btn-group-lg>.btn, .btn-lg{
+    margin-top: 40px;
+    border-radius: 0px
+}
+
+.footer{
+    margin-top: 60px;
+    bottom: 0px;
+    border-top: 1px solid #999;
+    height: 40px
+}
+
+.footer a{
+    float: right;
+    margin: 10px 10px 0px;
+    
+}
+
+
+span {font-weight: bold}
+
+.bdg {width: 30%; margin: auto}
+
+.annuler{background-color: #E41B17; color: #FFF}
+
+.annuler:hover {background-color: #a94442; color: #FFF}

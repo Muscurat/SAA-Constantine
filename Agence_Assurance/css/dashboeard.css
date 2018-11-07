@@ -1,0 +1,69 @@
+/* Start header client */
+
+.dash-nav li
+{
+    -webkit-transition:all 0.2s ease;
+    -moz-transition:all 0.2s ease;
+    -o-transition:all 0.2s ease;
+    transition:all 0.2s ease;
+}
+
+.dash-nav li:hover
+{
+    background-color: #E41B17;
+}    
+
+.client-info .container-fluid{
+    margin-left: 0px
+}
+
+/* End header client */
+
+body{padding-top: 0px; background-color: #696969}
+
+.header-container {background-color: #E9E9E9; min-height: 670px; padding-top: 70px; padding-bottom: 50px}
+
+.body-container .statistiques{width: 60%; margin: auto}
+
+.body-container .statistiques h2{color: #E41B17;}
+
+.body-container h3{margin-bottom: 50px}
+
+.body-container .stat span{font-weight: bold; font-size: 20px}
+
+                                /* Start Agent Dashboard */
+
+/* Start navbar */
+
+.top-header .header
+{
+    background-color: #EEE;
+    width: 100%;
+    height: 100px
+}
+
+.top-header .header .navbar-brand 
+{
+    color: #999;
+    margin-top: 20px;
+    margin-left: 400px
+}
+
+/* End navbar */
+
+/* Start agent menu */
+
+.agent-menu{
+    width: 230px;
+    min-height: 567px;
+    background-color: #999
+}
+
+.body-div .row .col-md-4 {width: 17.333333%}
+.body-div .row .col-md-8 {width: 82.66666667%}
+
+.body-div .row{margin-right: 0px}
+
+/* End agent menu */
+
+                                /* End Agent Dashboard */
